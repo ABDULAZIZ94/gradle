@@ -36,13 +36,18 @@ public interface UserCodeApplicationContext {
      */
     void apply(DisplayName displayName, Action<? super UserCodeApplicationId> action);
 
-    void reapply(UserCodeApplicationId id, Runnable runnable);
-
     <T> Action<T> decorateWithCurrent(Action<T> action);
 
     @Nullable
-    UserCodeApplicationId current();
+    Application current();
 
-    @Nullable
-    DisplayName currentDisplayName();
+    interface Application {
+        UserCodeApplicationId getId();
+
+        DisplayName getDisplayName();
+
+        <T> Action<T> reapplyLater(Action<T> action);
+
+        void reapply(Runnable runnable);
+    }
 }
