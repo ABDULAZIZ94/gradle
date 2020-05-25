@@ -285,8 +285,8 @@ class UnitTestAndCompilePlugin : Plugin<Project> {
                     maxFailures.set(10)
                 }
                 distribution {
-                    maxLocalExecutors.set(0)
-                    enabled.set(true)
+                    maxLocalExecutors.set(System.getProperty("max.local.executors")?.toInt() ?: 0)
+                    enabled.set(System.getProperty("enable.distribution.plugin")?.toBoolean() ?: true)
                 }
                 doFirst {
                     logger.lifecycle("maxParallelForks for '$path' is $maxParallelForks")
