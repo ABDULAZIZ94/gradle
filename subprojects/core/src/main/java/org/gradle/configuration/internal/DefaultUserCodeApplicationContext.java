@@ -47,7 +47,7 @@ public class DefaultUserCodeApplicationContext implements UserCodeApplicationCon
     }
 
     @Override
-    public <T> Action<T> decorateWithCurrent(final Action<T> action) {
+    public <T> Action<T> reapplyCurrentLater(final Action<T> action) {
         final CurrentApplication current = currentApplication.get();
         if (current == null) {
             return action;
@@ -91,13 +91,16 @@ public class DefaultUserCodeApplicationContext implements UserCodeApplicationCon
 
         @Override
         public <T> Action<T> reapplyLater(Action<T> action) {
-            return t -> {
-                CurrentApplication current = currentApplication.get();
-                currentApplication.set(CurrentApplication.this);
-                try {
-                    action.execute(t);
-                } finally {
-                    currentApplication.set(current);
+            return new Action<T>() {
+                @Override
+                public void execute(T t) {
+                    CurrentApplication current = currentApplication.get();
+                    currentApplication.set(CurrentApplication.this);
+                    try {
+                        action.execute(t);
+                    } finally {
+                        currentApplication.set(current);
+                    }
                 }
             };
         }
