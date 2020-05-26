@@ -30,9 +30,6 @@ class RootProject(model: CIBuildModel) : Project({
         }
     }
 
-    params {
-        password("teamcity.user.bot-gradle.token", "credentialsJSON:6b612db7-378d-4c16-adeb-f74543ff29ae", display = ParameterDisplay.HIDDEN)
-    }
 
     var prevStage: Stage? = null
     model.stages.forEach { stage ->

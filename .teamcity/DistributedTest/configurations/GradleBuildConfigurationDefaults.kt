@@ -85,7 +85,7 @@ fun BaseGradleBuildType.gradleRunnerStep(model: CIBuildModel, gradleTasks: Strin
                 buildToolGradleParameters(daemon, os = os) +
                     this@gradleRunnerStep.buildCache.gradleParameters(os) +
                     listOf(extraParameters) +
-                    "-PteamCityToken=%teamcity.user.bot-gradle.token%" +
+                    "-PteamCityToken=12345" +
                     "-PteamCityBuildId=%teamcity.build.id%" +
                     buildScanTags.map { buildScanTag(it) }
                 ).joinToString(separator = " ")
