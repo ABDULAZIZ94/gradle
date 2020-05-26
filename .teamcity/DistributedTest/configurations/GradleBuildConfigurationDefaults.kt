@@ -52,16 +52,16 @@ fun BuildFeatures.publishBuildStatusToGithub(model: CIBuildModel) {
 }
 
 fun BuildFeatures.triggeredOnPullRequests() {
-    pullRequests {
-        vcsRootExtId = "DistributedTest_DistributedTest"
-        provider = github {
-            authType = token {
-                token = "credentialsJSON:5306bfc7-041e-46e8-8d61-1d49424e7b04"
-            }
-            filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
-            filterTargetBranch = allBranchesFilter
-        }
-    }
+//    pullRequests {
+//        vcsRootExtId = "DistributedTest_DistributedTest"
+//        provider = github {
+//            authType = token {
+//                token = "credentialsJSON:5306bfc7-041e-46e8-8d61-1d49424e7b04"
+//            }
+//            filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
+//            filterTargetBranch = allBranchesFilter
+//        }
+//    }
 }
 
 fun ProjectFeatures.buildReportTab(title: String, startPage: String) {
